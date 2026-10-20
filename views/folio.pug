@@ -1,0 +1,31 @@
+extends default
+
+block content
+  div.page_content
+    h1 Your Quotes
+    p View your quotes by type, source, or tag.
+
+    div(class=search ? 'search_widget open' : 'search_widget')
+      button.search_toggle(type='button', onclick='toggleSearch(this)') Search
+      form(action='/folio', method='get').search_form
+        input(type='text', name='search', placeholder='Search your quotes', value=search)
+    script.
+      function toggleSearch(button) {
+        var widget = button.closest('.search_widget');
+        if (widget.classList.contains('open')) {
+          window.location = '/folio';
+        } else {
+          widget.classList.add('open');
+        }
+      }
+
+    div.quote_grid
+      each quote in quotes
+        div.quote_card
+          p.quote_text "#{quote.quote_text}"
+          p.quote_source #{quote.source}
+          hr
+          p.quote_meta #{quote.type} | #{quote.genre} | #{quote.tag} | #{quote.created_at}
+
+    p.add_quote_link
+      a(href='/quoteForm') Add Quote

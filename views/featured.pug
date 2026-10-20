@@ -1,0 +1,12 @@
+extends default
+
+block content
+  div.page_content
+    h2 Featured Quotes
+    div.quote_grid.quote_grid_single
+      each quote in dailyQuotes
+        div.quote_card
+          p.quote_text "#{quote.dq_text}"
+          p.quote_source #{quote.source}
+          hr
+          p.quote_meta #{quote.dq_type} | #{quote.dq_genre} | #{quote.dq_date}

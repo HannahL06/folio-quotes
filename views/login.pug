@@ -1,0 +1,15 @@
+extends default
+
+block content
+  div.page_content
+    if message
+      p= message
+    if !loggedIn
+      form(action='/loginResponse', method='post')
+        label Username
+        input(type='text', name='username')
+
+        label Password
+        input(type='password', name='password')
+
+        input(type='submit', value='Submit')

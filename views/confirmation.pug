@@ -1,0 +1,11 @@
+extends default
+
+block content
+  div.page_content
+    h2 Thank you for saving a quote!
+    div.quote_grid.quote_grid_single
+      div.quote_card
+        p.quote_text "#{quote.quote_text}"
+        p.quote_source #{quote.source}
+        hr
+        p.quote_meta #{quote.type} | #{quote.genre} | #{quote.tag} | #{quote.created_at}
