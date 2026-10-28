@@ -1,29 +1,40 @@
 doctype html
-html
+html(lang='en')
   head
-    title #{title}
-    link(rel='stylesheet', href='/css/styles.css')
+    title #{title} | Folio
+    meta(charset='utf-8')
     meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel='icon', href='/images/logo.png')
+    link(rel='preconnect', href='https://fonts.googleapis.com')
+    link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin)
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap')
+    link(rel='stylesheet', href='/css/styles.css')
   body
     main
-        div.flex_container
-            block header
-                header.top_bar
-                    a(href='/index').logo-link
-                        img(src='/images/logo.png').logo
-                    ul.navbar
-                        li
-                            a(href='/index') Home
-                        li
-                            a(href='/folio') Folio
-                        li
-                            a(href='/featured') Featured Quotes
-                        li
-                            a(href='/accounts') Accounts
-                        li
-                            a(href='/contact') Contact
-                h1 #{title}
-            block content
-        block footer
-          footer.site_footer
-            p © 2026 Hannah Lichtman
+      div.flex_container
+        header.top_bar
+          a(href='/index').logo-link
+            img(src='/images/logo.png', alt='Folio').logo
+          button.nav_toggle(type='button', aria-label='Toggle navigation', onclick='document.querySelector(".navbar").classList.toggle("open")')
+            span
+            span
+            span
+          ul.navbar
+            li
+              a(href='/index') Home
+            li
+              a(href='/browse') Browse
+            li
+              a(href='/folio') My Quotes
+            li
+              a(href='/featured') Featured Quotes
+            li
+              a(href='/accounts') Accounts
+            li
+              a(href='/contact') Contact
+        block page_title
+          h1.page_title #{title}
+        block content
+      block footer
+        footer.site_footer
+          p © 2026 Hannah Lichtman

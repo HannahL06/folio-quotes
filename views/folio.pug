@@ -2,22 +2,32 @@ extends default
 
 block content
   div.page_content
-    h1 Your Quotes
-    p View your quotes by type, source, or tag.
+    h1 My Quotes
+    p Manage the quotes you've added — edit, delete, or filter by type, source, or tag.
 
-    div(class=search ? 'search_widget open' : 'search_widget')
-      button.search_toggle(type='button', onclick='toggleSearch(this)') Search
-      form(action='/folio', method='get').search_form
-        input(type='text', name='search', placeholder='Search your quotes', value=search)
-    script.
-      function toggleSearch(button) {
-        var widget = button.closest('.search_widget');
-        if (widget.classList.contains('open')) {
-          window.location = '/folio';
-        } else {
-          widget.classList.add('open');
-        }
-      }
+    form(action='/folio', method='get').filter_bar
+      input(type='text', name='search', placeholder='Search your quotes', value=filters.search)
+
+      select(name='type')
+        option(value='') All Types
+        each type in quoteTypes
+          option(value=type.quote_type_id selected=filters.type == type.quote_type_id)= type.type
+
+      select(name='genre')
+        option(value='') All Genres
+        each genre in quoteGenres
+          option(value=genre.quote_genre_id selected=filters.genre == genre.quote_genre_id)= genre.genre
+
+      select(name='sort')
+        option(value='newest' selected=filters.sort === 'newest' || !filters.sort) Newest First
+        option(value='oldest' selected=filters.sort === 'oldest') Oldest First
+        option(value='type' selected=filters.sort === 'type') Type (A-Z)
+        option(value='genre' selected=filters.sort === 'genre') Genre (A-Z)
+
+      input(type='submit', value='Apply')
+
+    if quotes.length === 0
+      p.empty_state No quotes match your filters yet.
 
     div.quote_grid
       each quote in quotes
@@ -26,6 +36,18 @@ block content
           p.quote_source #{quote.source}
           hr
           p.quote_meta #{quote.type} | #{quote.genre} | #{quote.tag} | #{quote.created_at}
+          div.quote_actions
+            a(href='/quoteForm?edit=' + quote.quote_id) Edit
+            if quote.post_id
+              form(action='/unpost/' + quote.post_id, method='post')
+                input(type='submit', value='Unpost').unpost_button
+            else
+              form(action='/post/' + quote.quote_id, method='post')
+                input(type='submit', value='Post to Browse')
+            form(action='/deleteQuote/' + quote.quote_id, method='post', onsubmit="return confirm('Delete this quote?')")
+              input(type='submit', value='Delete').delete_button
 
     p.add_quote_link
       a(href='/quoteForm') Add Quote
+      |  ·
+      a(href='/myPosts') View My Posts

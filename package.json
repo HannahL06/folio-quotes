@@ -1,22 +1,27 @@
 {
-  "name": "module-12",
+  "name": "folio",
   "version": "1.0.0",
-  "description": "",
+  "description": "A place to collect and organize the quotes worth remembering.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
+  "keywords": [
+    "express",
+    "pug",
+    "mysql"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^18.0.8",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
-    "mysql": "^2.18.1",
-    "nodemailer": "^9.0.4",
+    "mysql2": "^3.24.6",
+    "nodemailer": "^10.1.7",
     "pug": "^3.0.4"
   }
 }

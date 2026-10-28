@@ -1,0 +1,27 @@
+extends default
+
+block content
+  div.page_content
+    if error
+      p.form_error= error
+    form(action='/register', method='post')
+      label First Name
+      input(type='text', name='firstName', value=formData.firstName, required=true)
+
+      label Last Name
+      input(type='text', name='lastName', value=formData.lastName, required=true)
+
+      label Email
+      input(type='email', name='email', value=formData.email, required=true)
+
+      label Username
+      input(type='text', name='username', value=formData.username, required=true)
+
+      label Password
+      input(type='password', name='password', required=true)
+
+      input(type='submit', value='Create Account')
+
+    p.form_footer_link
+      | Already have an account?
+      a(href='/login') Log in

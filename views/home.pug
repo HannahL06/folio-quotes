@@ -1,7 +1,52 @@
 extends default
 
+block page_title
+
 block content
-    div.page_content
-        h2 About Folio
-        p Folio is a place to collect the lines worth remembering. Whether they come from books, conversations, songs, interviews,
-        or somewhere unexpected, every quote has a place in your Folio. Browse what others have found, discover something new, and build a collection of words that stay with you.
+  section.hero
+    p.hero_eyebrow Your personal quote collection
+    h1.hero_title Save the lines worth remembering.
+    p.hero_subtitle
+      | Folio is where you collect quotes from books, songs, speeches, and
+      |  conversations — then tag, search, and revisit them whenever you need them.
+    div.hero_actions
+      if loggedIn
+        a(href='/folio').button_primary Go to Your Folio
+      else
+        a(href='/register').button_primary Get Started — It's Free
+        a(href='/login').button_secondary Log In
+      a(href='/browse').button_secondary Browse Quotes
+
+  if featuredQuote
+    section.home_featured
+      p.section_label Today's Featured Quote
+      div.quote_grid.quote_grid_single
+        div.quote_card
+          p.quote_text "#{featuredQuote.dq_text}"
+          p.quote_source #{featuredQuote.source}
+          hr
+          p.quote_meta #{featuredQuote.dq_type} | #{featuredQuote.dq_genre}
+
+  section.how_it_works
+    p.section_label How It Works
+    div.steps_grid
+      div.step_card
+        span.step_number 1
+        h3 Collect
+        p Found a line that stopped you in your tracks? Save it to your Folio with its source and how you found it.
+      div.step_card
+        span.step_number 2
+        h3 Organize
+        p Tag each quote by type and genre so your collection stays searchable as it grows.
+      div.step_card
+        span.step_number 3
+        h3 Rediscover
+        p Search, filter, and sort your Folio to find exactly the quote you need, exactly when you need it.
+
+  section.home_cta
+    h2 Start building your Folio today.
+    p The best quotes are the ones you can actually find again.
+    if loggedIn
+      a(href='/quoteForm').button_primary Add Your First Quote
+    else
+      a(href='/register').button_primary Create a Free Account
