@@ -325,7 +325,13 @@ app.use((err, req, res, next) => {
     });
 });
 
-var PORT = process.env.PORT || 3000;
-const server = app.listen(PORT, () => {
-    console.log('Express running on http://localhost:' + PORT);
-});
+// Only start listening when run directly (node server.js / npm start) - tests
+// import `app` and drive it with supertest without binding a real port.
+if (require.main === module) {
+    var PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log('Express running on http://localhost:' + PORT);
+    });
+}
+
+module.exports = app;
