@@ -34,7 +34,7 @@ block content
         div.quote_card.compact
           if loggedIn
             form(action='/like/' + post.post_id, method='post').heart_form
-              button(type='submit').heart_button(class=post.liked_by_viewer ? 'liked' : '')
+              button.heart_button(type='submit', class=post.liked_by_viewer ? 'liked' : '')
                 span.heart_icon= post.liked_by_viewer ? '♥' : '♡'
                 span.heart_count= post.like_count
           else

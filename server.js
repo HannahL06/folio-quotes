@@ -23,6 +23,18 @@ app.use(session({
     saveUninitialized: false
 }));
 
+var MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+// Available in every template as formatDate(date) - renders e.g. "Oct 28 2026"
+// instead of a Date's verbose default toString().
+app.locals.formatDate = function(date) {
+    if (!date) {
+        return '';
+    }
+    var d = new Date(date);
+    return MONTH_NAMES[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear();
+};
+
 // Wraps an async route handler so rejected promises reach Express's error handler
 // instead of crashing the process.
 function asyncHandler(fn) {

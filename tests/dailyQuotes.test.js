@@ -43,7 +43,7 @@ describe('Home page', () => {
     test('renders for logged-out visitors', async () => {
         var res = await request(app).get('/');
         expect(res.status).toBe(200);
-        expect(res.text).toContain('Save the lines worth remembering');
+        expect(res.text).toContain('What lines will you keep today?');
     });
 
     test('swaps the hero CTA when logged in', async () => {

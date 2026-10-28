@@ -464,13 +464,13 @@ CREATE TABLE `quotes` (
 --
 
 INSERT INTO `quotes` (`quote_id`, `quote_text`, `source`, `quote_type`, `quote_genre`, `found_by`, `tag`, `user`, `created_at`) VALUES
-(9, 'I\'ve learned that people will forget what you said, people will forget what you did, but people will never forget the way you made them feel.', 'Maya Angelou', '9', '1', 'Myself', 'Famous Lines', 9, '2026-08-16 20:20:22'),
-(10, 'I am the master of my fate: I am the captain of my soul.', 'William Ernest Henley, \"Invictus\" (1875)', '7', '1', 'Myself', 'poem lines', 9, '2026-08-16 20:29:49'),
-(11, 'Imagination is more important than knowledge.', 'Albert Einstein, interview in 1929', '9', '8', 'Myself', 'Famous Lines', 9, '2026-08-16 20:29:49'),
-(12, 'Never in the field of human conflict was so much owed by so many to so few.', 'Winston Churchill, Speech praising RAF fighters in WWII', '3', '8', 'Myself', 'Famous Lines', 9, '2026-08-16 20:35:38'),
-(13, 'Four score and twenty years ago...', 'Abraham Lincoln, Gettysburg Address', '1', '1', 'Found on Folio', 'historical', 9, '2026-08-17 21:44:18'),
-(14, 'Be the change you want to see the world', 'Gandhi', '9', '2', 'Found on Folio', 'favorite motivational quotes', 9, '2026-08-17 21:57:41'),
-(15, 'Four score and twenty years ago...', 'Abraham Lincoln, Gettysburg Address', '3', '8', 'Found Myself', 'Favorite History Quotes', 9, '2026-08-23 08:45:42');
+(9, 'I\'ve learned that people will forget what you said, people will forget what you did, but people will never forget the way you made them feel.', 'Maya Angelou', '9', '1', 'Myself', 'Famous Lines', 1, '2026-08-16 20:20:22'),
+(10, 'I am the master of my fate: I am the captain of my soul.', 'William Ernest Henley, \"Invictus\" (1875)', '7', '1', 'Myself', 'poem lines', 2, '2026-08-16 20:29:49'),
+(11, 'Imagination is more important than knowledge.', 'Albert Einstein, interview in 1929', '9', '8', 'Myself', 'Famous Lines', 3, '2026-08-16 20:29:49'),
+(12, 'Never in the field of human conflict was so much owed by so many to so few.', 'Winston Churchill, Speech praising RAF fighters in WWII', '3', '8', 'Myself', 'Famous Lines', 4, '2026-08-16 20:35:38'),
+(13, 'Four score and twenty years ago...', 'Abraham Lincoln, Gettysburg Address', '1', '1', 'Found on Folio', 'historical', 8, '2026-08-17 21:44:18'),
+(14, 'Be the change you want to see the world', 'Gandhi', '9', '2', 'Found on Folio', 'favorite motivational quotes', 1, '2026-08-17 21:57:41'),
+(15, 'Four score and twenty years ago...', 'Abraham Lincoln, Gettysburg Address', '3', '8', 'Found Myself', 'Favorite History Quotes', 2, '2026-08-23 08:45:42');
 
 -- --------------------------------------------------------
 
@@ -494,13 +494,13 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `quote_id`, `posted_by`, `posted_at`) VALUES
-(1, 9, 9, '2026-08-16 20:20:22'),
-(2, 10, 9, '2026-08-16 20:29:49'),
-(3, 11, 9, '2026-08-16 20:29:49'),
-(4, 12, 9, '2026-08-16 20:35:38'),
-(5, 13, 9, '2026-08-17 21:44:18'),
-(6, 14, 9, '2026-08-17 21:57:41'),
-(7, 15, 9, '2026-08-23 08:45:42');
+(1, 9, 1, '2026-08-16 20:20:22'),
+(2, 10, 2, '2026-08-16 20:29:49'),
+(3, 11, 3, '2026-08-16 20:29:49'),
+(4, 12, 4, '2026-08-16 20:35:38'),
+(5, 13, 8, '2026-08-17 21:44:18'),
+(6, 14, 1, '2026-08-17 21:57:41'),
+(7, 15, 2, '2026-08-23 08:45:42');
 
 -- --------------------------------------------------------
 

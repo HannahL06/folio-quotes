@@ -12,6 +12,10 @@ var pool = mysql.createPool({
     connectionLimit: 10
 });
 
+function closePool() {
+    return pool.end();
+}
+
 async function validateLogin(username, password) {
     var [rows] = await pool.query(
         'SELECT user_id, username, password FROM authorizedusers WHERE username = ?',
@@ -297,16 +301,26 @@ async function getQuoteById(quoteId, userId) {
     return rows[0] || null;
 }
 
-async function getDailyQuote() {
-    var [rows] = await pool.query(
-        'SELECT dq_text, source, dq_type, dq_genre, dq_date FROM daily_quotes WHERE dq_date = CURDATE()'
-    );
-    return rows;
-}
-
 function getDayOfYear(date) {
     var startOfYear = new Date(date.getFullYear(), 0, 0);
     return Math.floor((date - startOfYear) / 86400000);
+}
+
+async function getDailyQuote() {
+    var columns = 'SELECT dq_text, source, dq_type, dq_genre, dq_date FROM daily_quotes ';
+    var [rows] = await pool.query(columns + 'WHERE dq_date = CURDATE()');
+    if (rows.length > 0) {
+        return rows;
+    }
+
+    // No row for today (e.g. past the seeded year): rotate through whatever exists.
+    var [[{ total }]] = await pool.query('SELECT COUNT(*) AS total FROM daily_quotes');
+    if (total === 0) {
+        return [];
+    }
+    var offset = getDayOfYear(new Date()) % total;
+    var [fallback] = await pool.query(columns + 'ORDER BY dq_id LIMIT 1 OFFSET ' + offset);
+    return fallback;
 }
 
 async function getUserDailyQuote(userId) {
@@ -328,6 +342,7 @@ async function getUserDailyQuote(userId) {
 }
 
 module.exports = {
+    closePool,
     validateLogin,
     registerUser,
     getQuotes,

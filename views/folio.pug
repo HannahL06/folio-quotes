@@ -35,7 +35,7 @@ block content
           p.quote_text "#{quote.quote_text}"
           p.quote_source #{quote.source}
           hr
-          p.quote_meta #{quote.type} | #{quote.genre} | #{quote.tag} | #{quote.created_at}
+          p.quote_meta #{quote.type} | #{quote.genre} | #{quote.tag} | #{formatDate(quote.created_at)}
           div.quote_actions
             a(href='/quoteForm?edit=' + quote.quote_id) Edit
             if quote.post_id
