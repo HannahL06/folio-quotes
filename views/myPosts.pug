@@ -17,7 +17,6 @@ block content
           p.quote_text "#{post.quote_text}"
           p.quote_source #{post.source}
           hr
-          p.quote_meta #{post.type} | #{post.genre} | #{post.tag}
           p.quote_author + Folio'd #{post.foliod_count}
           div.quote_actions
             form(action='/unpost/' + post.post_id, method='post')

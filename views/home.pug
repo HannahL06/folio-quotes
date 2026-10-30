@@ -26,12 +26,6 @@ block content
         { title: 'See how your posts are doing', button: 'My Posts', href: '/myPosts' }
       ] }
     ];
-    var genres = [
-      { id: 1, name: 'Inspirational' }, { id: 2, name: 'Motivational' },
-      { id: 3, name: 'Funny' }, { id: 4, name: 'Wise' },
-      { id: 5, name: 'Heartwarming' }, { id: 6, name: 'Satirical' },
-      { id: 7, name: 'Nostalgic' }, { id: 8, name: 'Famous Lines' }
-    ];
     var spotlight = featuredQuote || { dq_text: 'Not all those who wander are lost.', source: 'J.R.R. Tolkien, The Fellowship of the Ring', dq_type: 'Book', dq_genre: 'Inspirational' };
 
   section.hero_band.full_bleed
@@ -106,14 +100,6 @@ block content
         p.quote_source #{spotlight.source}
         hr
         p.quote_meta #{spotlight.dq_type} | #{spotlight.dq_genre}
-
-  section.genres
-    h2.section_heading Quotes for absolutely anything
-    div.genre_strip
-      each genre in genres
-        a.genre_tile(href='/browse?genre=' + genre.id)= genre.name
-    div.genres_action
-      a.button_secondary(href='/browse') Browse all quotes
 
   section.final_cta
     h2 Start collecting with Folio

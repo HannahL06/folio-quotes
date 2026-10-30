@@ -444,48 +444,6 @@ main {
     margin-left: 36px;
 }
 
-.genres {
-    padding: 28px 0 8px;
-}
-
-.genre_strip {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    padding: 4px 2px 18px;
-}
-
-.genre_tile {
-    flex: 0 0 210px;
-    height: 250px;
-    display: flex;
-    align-items: flex-end;
-    padding: 22px;
-    border-radius: 22px;
-    color: #fff;
-    text-decoration: none;
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1.1;
-    scroll-snap-align: start;
-    transition: transform 0.15s ease;
-}
-
-.genre_tile:hover {
-    transform: translateY(-3px);
-}
-
-.genre_tile:nth-child(4n + 1) { background: linear-gradient(180deg, #c3cdee 0%, #4f5f93 100%); }
-.genre_tile:nth-child(4n + 2) { background: linear-gradient(180deg, #c5e0d0 0%, #3f6e57 100%); }
-.genre_tile:nth-child(4n + 3) { background: linear-gradient(180deg, #e8c8d8 0%, #7d4f6b 100%); }
-.genre_tile:nth-child(4n + 4) { background: linear-gradient(180deg, #cfc2e8 0%, #5a4b86 100%); }
-
-.genres_action {
-    text-align: center;
-}
-
 .final_cta {
     display: flex;
     flex-direction: column;
