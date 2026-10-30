@@ -2,9 +2,6 @@ extends default
 
 block content
   div.page_content
-    h1 My Quotes
-    p Manage the quotes you've added — edit, delete, or filter by type, source, or tag.
-
     form(action='/folio', method='get').filter_bar
       input(type='text', name='search', placeholder='Search your quotes', value=filters.search)
 

@@ -7,7 +7,7 @@ html(lang='en')
     link(rel='icon', href='/images/logo.png')
     link(rel='preconnect', href='https://fonts.googleapis.com')
     link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin)
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:wght@500&display=swap')
     link(rel='stylesheet', href='/css/styles.css')
   body
     main
@@ -33,7 +33,26 @@ html(lang='en')
             li
               a(href='/contact') Contact
         block page_title
-          h1.page_title #{title}
+          -
+            var pageHeadings = {
+              'Folio': { h: 'My Quotes', sub: 'Edit, post, or delete your quotes, and filter them any way you like.' },
+              'Browse Quotes': { h: 'Browse Quotes', sub: 'See what everyone has saved and find new lines worth remembering.' },
+              'My Posts': { h: 'My Posts', sub: 'The quotes you have published to Browse.' },
+              'Daily Feed': { h: 'Featured Quotes', sub: 'A new line every day, plus one from your own collection.' },
+              'Login': { h: 'Welcome back', sub: 'Log in to open your Folio.' },
+              'Create Account': { h: 'Start your Folio', sub: 'Create a free account to collect, post, and share quotes.' },
+              'Contact': { h: 'Get in touch', sub: 'Questions, ideas, or feedback? Send us a message.' },
+              'Accounts': { h: 'Your account', sub: 'Manage your Folio account.' },
+              'Add Quote': { h: 'Add a quote', sub: 'Save a line worth remembering.' },
+              'Edit Quote': { h: 'Edit your quote', sub: 'Update the text, source, or tags.' },
+              'Confirmation': { h: 'Quote saved', sub: 'Thank you for saving a quote.' },
+              'Something Went Wrong': { h: 'Something went wrong', sub: '' }
+            };
+            var heading = pageHeadings[title] || { h: title, sub: '' };
+          section.page_band.full_bleed
+            h1.page_band_title= heading.h
+            if heading.sub
+              p.page_band_sub= heading.sub
         block content
       block footer
         footer.site_footer

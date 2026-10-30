@@ -2,18 +2,19 @@ extends default
 
 block content
   div.page_content
-    if message
-      p= message
-    if !loggedIn
-      form(action='/loginResponse', method='post')
-        label Username
-        input(type='text', name='username')
+    div.panel
+      if message
+        p.panel_message= message
+      if !loggedIn
+        form(action='/loginResponse', method='post')
+          label Username
+          input(type='text', name='username')
 
-        label Password
-        input(type='password', name='password')
+          label Password
+          input(type='password', name='password')
 
-        input(type='submit', value='Submit')
+          input(type='submit', value='Log in')
 
-      p.form_footer_link
-        | Don't have an account?
-        a(href='/register') Sign up
+        p.form_footer_link
+          | Don't have an account?
+          a(href='/register') Sign up
