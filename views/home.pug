@@ -5,32 +5,10 @@ block page_title
 block content
   -
     var tabs = [
-      { id: 'collect', label: 'Collect', tiles: [
-        { title: 'Save a quote in seconds', button: 'Add a quote', href: '/quoteForm' },
-        { title: 'Tag every quote by type and genre', button: 'Start tagging', href: '/quoteForm' },
-        { title: 'Remember where you found it', button: 'Add a source', href: '/quoteForm' }
-      ] },
-      { id: 'organize', label: 'Organize', tiles: [
-        { title: 'Search everything you have saved', button: 'Open My Quotes', href: '/folio' },
-        { title: 'Filter by type, genre, or tag', button: 'Filter quotes', href: '/folio' },
-        { title: 'Edit or remove a quote any time', button: 'Manage quotes', href: '/folio' }
-      ] },
-      { id: 'discover', label: 'Discover', tiles: [
-        { title: 'Browse what everyone is saving', button: 'Browse quotes', href: '/browse' },
-        { title: 'Today\'s quote, picked for you', button: 'See today\'s quote', href: '/featured' },
-        { title: 'Find the most loved lines', button: 'Most liked', href: '/browse?sort=likes' }
-      ] },
-      { id: 'share', label: 'Share', tiles: [
-        { title: 'Post a quote for everyone to see', button: 'Post a quote', href: '/folio' },
-        { title: 'Keep a line you found on Browse', button: 'Find a line', href: '/browse' },
-        { title: 'See how your posts are doing', button: 'My Posts', href: '/myPosts' }
-      ] }
-    ];
-    var genres = [
-      { id: 1, name: 'Inspirational' }, { id: 2, name: 'Motivational' },
-      { id: 3, name: 'Funny' }, { id: 4, name: 'Wise' },
-      { id: 5, name: 'Heartwarming' }, { id: 6, name: 'Satirical' },
-      { id: 7, name: 'Nostalgic' }, { id: 8, name: 'Famous Lines' }
+      { id: 'collect', label: 'Collect', text: 'Save any line worth keeping in a few seconds. Add the quote and where you found it, then tag it by type and genre so it is easy to find again.' },
+      { id: 'organize', label: 'Organize', text: 'Search everything you have saved, or narrow it down by type, genre, or tag. Edit or delete a quote whenever you like.' },
+      { id: 'discover', label: 'Discover', text: 'Browse what everyone else is saving and sort by the most loved lines. Every day Folio also picks a new quote to feature.' },
+      { id: 'share', label: 'Share', text: 'Post a quote to Browse so others can read it and like it. Found a line you love on someone else\'s post? Add it to your own collection.' }
     ];
     var spotlight = featuredQuote || { dq_text: 'Not all those who wander are lost.', source: 'J.R.R. Tolkien, The Fellowship of the Ring', dq_type: 'Book', dq_genre: 'Inspirational' };
 
@@ -45,25 +23,10 @@ block content
           a(href='/register').button_primary Start collecting
           a(href='/login').button_secondary Log in
 
-    div.showcase
-      div.float_card.float_a.quote_card
-        p.quote_text "Hope is the thing with feathers that perches in the soul."
-        p.quote_source Emily Dickinson
-      div.float_card.float_b.quote_card
-        p.quote_text "Call me Ishmael."
-        p.quote_source Herman Melville, Moby-Dick
-      div.float_card.float_c.quote_card
-        p.quote_text "I think, therefore I am."
-        p.quote_source René Descartes
-      div.float_card.float_d.quote_card
-        p.quote_text "Float like a butterfly, sting like a bee."
-        p.quote_source Muhammad Ali
-      div.showcase_center.quote_card
-        p.showcase_label Today's featured quote
-        p.quote_text "#{spotlight.dq_text}"
-        p.quote_source #{spotlight.source}
-        hr
-        p.quote_meta #{spotlight.dq_type} | #{spotlight.dq_genre}
+    div.hero_quote.quote_card
+      p.hero_quote_label Today's featured quote
+      p.quote_text "#{spotlight.dq_text}"
+      p.quote_source #{spotlight.source}
 
   section.tools
     h2.section_heading Tools to keep your best lines
@@ -72,48 +35,17 @@ block content
         button.tab_pill(type='button', role='tab', data-tab=tab.id, aria-selected=String(i === 0), class=i === 0 ? 'active' : '')= tab.label
     each tab, i in tabs
       div.tab_panel(id='panel-' + tab.id, role='tabpanel', hidden=i !== 0)
-        div.tile_row
-          each tile in tab.tiles
-            a.tile(href=tile.href)
-              h3= tile.title
-              span.tile_btn= tile.button
+        p.tab_text= tab.text
 
   section.banner.banner_blue
-    div.banner_text
-      h2 All your quotes. All in one place.
-      p Search, filter, and sort everything you have saved by type, genre, or tag, then edit or remove it whenever you like.
-      a.button_dark(href=loggedIn ? '/folio' : '/register') Explore My Quotes
-    div.banner_visual
-      div.quote_card
-        p.quote_text "The unexamined life is not worth living."
-        p.quote_source Socrates
-        hr
-        p.quote_meta Lines People Say | Wise
-      div.quote_card
-        p.quote_text "Tomorrow is always fresh, with no mistakes in it yet."
-        p.quote_source L.M. Montgomery, Anne of Green Gables
-        hr
-        p.quote_meta Book | Inspirational
+    h2 All your quotes. All in one place.
+    p Search, filter, and sort everything you have saved by type, genre, or tag, then edit or remove it whenever you like.
+    a.button_dark(href=loggedIn ? '/folio' : '/register') Explore My Quotes
 
-  section.banner.banner_green.banner_reverse
-    div.banner_text
-      h2 A new quote, every single day.
-      p Each day Folio features one line from the pages of literature, and one pulled from your own collection.
-      a.button_dark(href='/featured') See today's quote
-    div.banner_visual
-      div.quote_card
-        p.quote_text "#{spotlight.dq_text}"
-        p.quote_source #{spotlight.source}
-        hr
-        p.quote_meta #{spotlight.dq_type} | #{spotlight.dq_genre}
-
-  section.genres
-    h2.section_heading Quotes for absolutely anything
-    div.genre_strip
-      each genre in genres
-        a.genre_tile(href='/browse?genre=' + genre.id)= genre.name
-    div.genres_action
-      a.button_secondary(href='/browse') Browse all quotes
+  section.banner.banner_green
+    h2 A new quote, every single day.
+    p Each day Folio features one line from the pages of literature, and one pulled from your own collection.
+    a.button_dark(href='/featured') See today's quote
 
   section.final_cta
     h2 Start collecting with Folio

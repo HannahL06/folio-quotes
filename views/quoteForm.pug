@@ -2,33 +2,34 @@ extends default
 
 block content
   div.page_content
-    label Add your Quote here:
-    form(action=editQuote ? '/editQuote/' + editQuote.quote_id : '/addQuote', method='post')
-      textarea(name='quoteText', rows='8', cols='60')= editQuote ? editQuote.quote_text : ''
+    div.panel
+      form(action=editQuote ? '/editQuote/' + editQuote.quote_id : '/addQuote', method='post')
+        label Your quote
+        textarea(name='quoteText', rows='6')= editQuote ? editQuote.quote_text : ''
 
-      label Quote Source:
-      input(type='text', name='quoteSource', value=editQuote ? editQuote.source : '')
+        label Source
+        input(type='text', name='quoteSource', value=editQuote ? editQuote.source : '')
 
-      label What kind of text is your Quote?
-      select(name='quoteTypeOptions')
-        each type in quoteTypes
-          option(value=type.quote_type_id selected=editQuote && String(editQuote.quote_type) === String(type.quote_type_id))= type.type
+        label What kind of text is it?
+        select(name='quoteTypeOptions')
+          each type in quoteTypes
+            option(value=type.quote_type_id selected=editQuote && String(editQuote.quote_type) === String(type.quote_type_id))= type.type
 
-      select(name='quoteGenreOptions')
-        each genre in quoteGenres
-          option(value=genre.quote_genre_id selected=editQuote && String(editQuote.quote_genre) === String(genre.quote_genre_id))= genre.genre
+        select(name='quoteGenreOptions')
+          each genre in quoteGenres
+            option(value=genre.quote_genre_id selected=editQuote && String(editQuote.quote_genre) === String(genre.quote_genre_id))= genre.genre
 
-      label How did you find this Quote?
-      label
-        input(type='radio', name='foundBy', value='Found Myself', checked=editQuote && editQuote.found_by === 'Found Myself')
-        |  I found this quote myself
-      label
-        input(type='radio', name='foundBy', value='Found on Folio', checked=editQuote && editQuote.found_by === 'Found on Folio')
-        |  I saw this quote shared on Folio
-      label
-        input(type='radio', name='foundBy', value='Found by Others', checked=editQuote && editQuote.found_by === 'Found by Others')
-        |  This quote was shared with me by others outside Folio
+        label How did you find it?
+        label.radio_option
+          input(type='radio', name='foundBy', value='Found Myself', checked=editQuote && editQuote.found_by === 'Found Myself')
+          |  I found this quote myself
+        label.radio_option
+          input(type='radio', name='foundBy', value='Found on Folio', checked=editQuote && editQuote.found_by === 'Found on Folio')
+          |  I saw this quote shared on Folio
+        label.radio_option
+          input(type='radio', name='foundBy', value='Found by Others', checked=editQuote && editQuote.found_by === 'Found by Others')
+          |  It was shared with me by others outside Folio
 
-      label Add a tag to group and search your quotes how you would.
-      input(type='text', name='tag', value=editQuote ? editQuote.tag : '', size='60')
-      input(type='submit', value=editQuote ? 'Save Changes' : 'Submit')
+        label Tag (used to group and search your quotes)
+        input(type='text', name='tag', value=editQuote ? editQuote.tag : '')
+        input(type='submit', value=editQuote ? 'Save changes' : 'Add quote')

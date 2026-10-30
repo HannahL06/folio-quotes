@@ -5,6 +5,8 @@ var SALT_ROUNDS = 10;
 
 var pool = mysql.createPool({
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 3306,
+    ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: true } : undefined,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
@@ -306,21 +308,18 @@ function getDayOfYear(date) {
     return Math.floor((date - startOfYear) / 86400000);
 }
 
+// The site-wide quote of the day: cycles through the daily_quotes table, one
+// per day, so any number of rows works and it never runs out of dates.
 async function getDailyQuote() {
-    var columns = 'SELECT dq_text, source, dq_type, dq_genre, dq_date FROM daily_quotes ';
-    var [rows] = await pool.query(columns + 'WHERE dq_date = CURDATE()');
-    if (rows.length > 0) {
-        return rows;
-    }
-
-    // No row for today (e.g. past the seeded year): rotate through whatever exists.
     var [[{ total }]] = await pool.query('SELECT COUNT(*) AS total FROM daily_quotes');
     if (total === 0) {
         return [];
     }
     var offset = getDayOfYear(new Date()) % total;
-    var [fallback] = await pool.query(columns + 'ORDER BY dq_id LIMIT 1 OFFSET ' + offset);
-    return fallback;
+    var [rows] = await pool.query(
+        'SELECT dq_text, source, dq_type, dq_genre FROM daily_quotes ORDER BY dq_id LIMIT 1 OFFSET ' + offset
+    );
+    return rows;
 }
 
 async function getUserDailyQuote(userId) {

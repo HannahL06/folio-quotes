@@ -2,10 +2,10 @@ extends default
 
 block content
   div.page_content
-    h2 Manage Your account Here
-    if loggedIn
-      p Hello, #{username}
-      form(action='/logout', method='post').logout_form
-        input(type='submit', value='Logout')
-    else
-      p Error: You must log in #[a(href='/login') here] to view this page.
+    div.panel.panel_centered
+      if loggedIn
+        p.panel_message Hello, #{username}
+        form(action='/logout', method='post').logout_form
+          input(type='submit', value='Log out')
+      else
+        p.panel_message You must log in #[a(href='/login') here] to view this page.

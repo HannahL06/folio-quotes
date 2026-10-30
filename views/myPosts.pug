@@ -2,8 +2,6 @@ extends default
 
 block content
   div.page_content
-    p Quotes you've published to Browse. Unposting removes a quote from the public feed without deleting it from My Quotes.
-
     if posts.length === 0
       p.empty_state You haven't posted any quotes yet.
 
@@ -17,7 +15,6 @@ block content
           p.quote_text "#{post.quote_text}"
           p.quote_source #{post.source}
           hr
-          p.quote_meta #{post.type} | #{post.genre} | #{post.tag}
           p.quote_author + Folio'd #{post.foliod_count}
           div.quote_actions
             form(action='/unpost/' + post.post_id, method='post')

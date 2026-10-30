@@ -2,8 +2,6 @@ extends default
 
 block content
   div.page_content
-    p See what everyone on Folio has saved. Search, filter, and discover new lines worth remembering.
-
     form(action='/browse', method='get').filter_bar
       input(type='text', name='search', placeholder='Search all quotes', value=filters.search)
 
@@ -45,7 +43,6 @@ block content
           p.quote_text "#{post.quote_text}"
           p.quote_source #{post.source}
           hr
-          p.quote_meta #{post.type} | #{post.genre} | #{post.tag}
           p.quote_author Posted by #{post.posted_by_username}
 
           div.post_actions

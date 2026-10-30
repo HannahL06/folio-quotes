@@ -2,17 +2,17 @@ extends default
 
 block content
   div.page_content
-    h2 Featured Quotes
+    h2.section_heading Today's quote
     div.quote_grid.quote_grid_single
       each quote in dailyQuotes
         div.quote_card
           p.quote_text "#{quote.dq_text}"
           p.quote_source #{quote.source}
           hr
-          p.quote_meta #{quote.dq_type} | #{quote.dq_genre} | #{formatDate(quote.dq_date)}
+          p.quote_meta #{quote.dq_type} | #{quote.dq_genre}
 
     if loggedIn
-      h2 Your Quote of the Day
+      h2.section_heading.section_gap Your Quote of the Day
       if myDailyQuote
         div.quote_grid.quote_grid_single
           div.quote_card

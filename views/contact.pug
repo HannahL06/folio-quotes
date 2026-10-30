@@ -2,19 +2,20 @@ extends default
 
 block content
   div.page_content
-    if message
-      p= message
-    form(action='/contact', method='post')
-      label First Name
-      input(type='text', name='firstName', required=true)
+    div.panel
+      if message
+        p.panel_message= message
+      form(action='/contact', method='post')
+        label First Name
+        input(type='text', name='firstName', required=true)
 
-      label Last Name
-      input(type='text', name='lastName', required=true)
+        label Last Name
+        input(type='text', name='lastName', required=true)
 
-      label Email
-      input(type='email', name='email', required=true)
+        label Email
+        input(type='email', name='email', required=true)
 
-      label Message
-      textarea(name='emailBody', rows='6', required=true)
+        label Message
+        textarea(name='emailBody', rows='6', required=true)
 
-      input(type='submit', value='Send')
+        input(type='submit', value='Send')
